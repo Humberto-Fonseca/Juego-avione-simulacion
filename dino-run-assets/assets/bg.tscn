@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://djyb4gg4m7fki"]
+
+[ext_resource type="Texture2D" uid="uid://k0saisa5if7l" path="res://dino-run-assets/assets/img/background/plx-1.png" id="1_1em02"]
+[ext_resource type="Texture2D" uid="uid://dfqifh3ql0upw" path="res://dino-run-assets/assets/img/background/plx-2.png" id="2_deisv"]
+[ext_resource type="Texture2D" uid="uid://dqe3pyhr66vrj" path="res://dino-run-assets/assets/img/background/plx-3.png" id="3_xtlnq"]
+[ext_resource type="Texture2D" uid="uid://d2g60hcqkbemc" path="res://dino-run-assets/assets/img/background/plx-4.png" id="4_3640g"]
+[ext_resource type="Texture2D" uid="uid://d4j5n7vm5jdlr" path="res://dino-run-assets/assets/img/background/plx-5.png" id="5_423av"]
+
+[node name="Bg" type="ParallaxBackground" unique_id=1293467980]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=590306031]
+texture = ExtResource("1_1em02")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=1750842041]
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer" unique_id=451622960]
+texture = ExtResource("2_deisv")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="." unique_id=1523879123]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2" unique_id=1984027470]
+texture = ExtResource("3_xtlnq")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="." unique_id=594547440]
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3" unique_id=773537749]
+texture = ExtResource("4_3640g")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="." unique_id=1580424690]
+motion_scale = Vector2(0.9, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4" unique_id=146035718]
+texture = ExtResource("5_423av")
+centered = false

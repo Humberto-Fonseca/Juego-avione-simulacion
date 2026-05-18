@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://buwp3yf1ylun4"]
+
+[ext_resource type="Texture2D" uid="uid://c3lygwe81wael" path="res://dino-run-assets/assets/img/obstacles/stump.png" id="1_demo6"]
+
+[node name="Stump" type="Area2D" unique_id=1842612368]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1648073759]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_demo6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1215982969]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(20, 14, 15.25, 1.5, 10.75, -14, -0.75, -2.75, -11, -6, -16.75, 8.25, -20, 14)

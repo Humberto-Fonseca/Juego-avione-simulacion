@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://brk7oe8k5hf4i"]
+
+[ext_resource type="Script" uid="uid://cnnp7ia7xclpg" path="res://dino-run-assets/assets/avion.gd" id="1_d6mc3"]
+[ext_resource type="Texture2D" uid="uid://d2ypr1c4vti46" path="res://dino-run-assets/assets/img/obstacles/avion_gemini4.2.png" id="1_vnu0q"]
+[ext_resource type="AudioStream" uid="uid://c1hj0onkc415u" path="res://dino-run-assets/assets/sound/jump.wav" id="3_nyyl4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkd5v"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(7, 315, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6mc3"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(130, 315, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyyl4"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(253, 315, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt8sk"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(376, 315, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4xoo"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(7, 163, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x5x0"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(130, 163, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4435"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(253, 163, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsjl2"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(376, 163, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5fyi"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(130, 11, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1ug2"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(253, 11, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br3yg"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(376, 11, 123, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvhfd"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(7, 11, 123, 152)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vvfp2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkd5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6mc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nyyl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt8sk")
+}],
+"loop": true,
+"name": &"crash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4xoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x5x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4435")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsjl2")
+}],
+"loop": true,
+"name": &"turbo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5fyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1ug2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br3yg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvhfd")
+}],
+"loop": true,
+"name": &"volando",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7jfv"]
+size = Vector2(192, 120)
+
+[node name="avion" type="CharacterBody2D" unique_id=295396669]
+script = ExtResource("1_d6mc3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882920959]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_vvfp2")
+animation = &"volando"
+
+[node name="Col_fly" type="CollisionShape2D" parent="." unique_id=459146143]
+position = Vector2(-8, -4)
+shape = SubResource("RectangleShape2D_m7jfv")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1757747466]
+stream = ExtResource("3_nyyl4")
+volume_db = -25.0

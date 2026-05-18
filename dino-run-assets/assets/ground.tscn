@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ctddd4c3wypkp"]
+
+[ext_resource type="Texture2D" uid="uid://dfqh2vyr2ecxn" path="res://dino-run-assets/assets/img/background/ground.png" id="1_nwj4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwxc3"]
+size = Vector2(2304, 89)
+
+[node name="Ground" type="StaticBody2D" unique_id=232305911]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=96016652]
+texture = ExtResource("1_nwj4r")
+centered = false
+offset = Vector2(0, 522)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=412180372]
+position = Vector2(1152, 572.5)
+shape = SubResource("RectangleShape2D_xwxc3")

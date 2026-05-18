@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://b8lvpcmvuy0k3"]
+
+[ext_resource type="Texture2D" uid="uid://q0gsulnn43b6" path="res://dino-run-assets/assets/img/obstacles/Bird.png" id="1_vnc57"]
+[ext_resource type="Script" uid="uid://dvdu3swqslir0" path="res://dino-run-assets/assets/bird.gd" id="1_xm6f1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm6f1"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysu8e"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obmsc"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjdy2"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gesyt"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahhbu"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dob8c"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hck3a"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1leq"]
+atlas = ExtResource("1_vnc57")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0vh6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm6f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysu8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obmsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjdy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gesyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahhbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dob8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hck3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1leq")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fugce"]
+size = Vector2(14, 19)
+
+[node name="bird" type="Area2D" unique_id=60338051]
+position = Vector2(33, 15)
+scale = Vector2(4, 4)
+script = ExtResource("1_xm6f1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2021627623]
+texture_filter = 1
+position = Vector2(-33, -15)
+sprite_frames = SubResource("SpriteFrames_0vh6t")
+animation = &"flying"
+autoplay = "flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1885500728]
+position = Vector2(-28, -15.5)
+shape = SubResource("RectangleShape2D_fugce")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1292401855]
+position = Vector2(-38, -16)
+polygon = PackedVector2Array(-4, -3, -9, 1, -4, 10, 0, 3, 7, 2, 7, -4)

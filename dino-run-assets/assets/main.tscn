@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://3peytltn7u77"]
+
+[ext_resource type="Script" uid="uid://bu72l48tne20" path="res://dino-run-assets/assets/main.gd" id="1_aqs15"]
+[ext_resource type="PackedScene" uid="uid://djyb4gg4m7fki" path="res://dino-run-assets/assets/bg.tscn" id="1_cpmes"]
+[ext_resource type="PackedScene" uid="uid://ctddd4c3wypkp" path="res://dino-run-assets/assets/ground.tscn" id="2_aqs15"]
+[ext_resource type="PackedScene" uid="uid://bd7hbigwrv71j" path="res://dino-run-assets/assets/hud.tscn" id="5_bptky"]
+[ext_resource type="PackedScene" uid="uid://cu70mfw1s8sod" path="res://retry.tscn" id="6_pd5mr"]
+[ext_resource type="PackedScene" uid="uid://brk7oe8k5hf4i" path="res://dino-run-assets/assets/avion.tscn" id="7_nu1rs"]
+[ext_resource type="PackedScene" uid="uid://dbqj47cj3w77x" path="res://dino-run-assets/assets/bat.tscn" id="8_uli6v"]
+
+[node name="Main" type="Node" unique_id=894632688]
+script = ExtResource("1_aqs15")
+
+[node name="Bg" parent="." unique_id=1293467980 instance=ExtResource("1_cpmes")]
+
+[node name="Ground" parent="." unique_id=232305911 instance=ExtResource("2_aqs15")]
+position = Vector2(0, 32)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=757700021]
+position = Vector2(576, 324)
+
+[node name="HUD" parent="." unique_id=1534607829 instance=ExtResource("5_bptky")]
+
+[node name="retry" parent="." unique_id=1973351929 instance=ExtResource("6_pd5mr")]
+process_mode = 2
+
+[node name="avion" parent="." unique_id=295396669 instance=ExtResource("7_nu1rs")]
+
+[node name="bat" parent="." unique_id=958445217 instance=ExtResource("8_uli6v")]

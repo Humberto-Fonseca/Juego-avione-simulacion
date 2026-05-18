@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dbqj47cj3w77x"]
+
+[ext_resource type="Script" uid="uid://b5005s5n7rke2" path="res://dino-run-assets/assets/bat.gd" id="1_2qy07"]
+[ext_resource type="Texture2D" uid="uid://d4gymfpqr154a" path="res://dino-run-assets/assets/img/obstacles/32x32-bat-sprite.png" id="1_4vgyb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qy07"]
+atlas = ExtResource("1_4vgyb")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmhjq"]
+atlas = ExtResource("1_4vgyb")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dupq"]
+atlas = ExtResource("1_4vgyb")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iv8d7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qy07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmhjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dupq")
+}],
+"loop": true,
+"name": &"volando",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7tck"]
+size = Vector2(78, 126)
+
+[node name="bat" type="Area2D" unique_id=958445217]
+script = ExtResource("1_2qy07")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1995182164]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_iv8d7")
+animation = &"volando"
+autoplay = "volando"
+frame_progress = 0.73437643
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=254220399]
+position = Vector2(-12, -7)
+shape = SubResource("RectangleShape2D_t7tck")

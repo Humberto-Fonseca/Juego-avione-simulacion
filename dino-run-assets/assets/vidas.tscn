@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dq5vts1qj1k3r"]
+
+[ext_resource type="Texture2D" uid="uid://bxbkwbfkytudu" path="res://dino-run-assets/assets/img/obstacles/corazon.png" id="1_1s44y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dct3c"]
+atlas = ExtResource("1_1s44y")
+region = Rect2(0, 200, 600, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqvut"]
+atlas = ExtResource("1_1s44y")
+region = Rect2(0, 0, 600, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg3ms"]
+atlas = ExtResource("1_1s44y")
+region = Rect2(0, 400, 600, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0dxua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dct3c")
+}],
+"loop": true,
+"name": &"dosCorazones",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqvut")
+}],
+"loop": true,
+"name": &"tresCorazones",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gg3ms")
+}],
+"loop": true,
+"name": &"unCorazon",
+"speed": 5.0
+}]
+
+[node name="vidas" type="CharacterBody2D" unique_id=158638832]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2025421121]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_0dxua")
+animation = &"unCorazon"

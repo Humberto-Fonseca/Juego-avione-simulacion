@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://gqhlpp8h4p1f"]
+
+[ext_resource type="Texture2D" uid="uid://d1ohdj0obvdw4" path="res://dino-run-assets/assets/img/obstacles/barrel.png" id="1_q74ni"]
+
+[node name="barrel" type="Area2D" unique_id=229638425]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1606395871]
+texture_filter = 1
+scale = Vector2(4.8, 6)
+texture = ExtResource("1_q74ni")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1609952239]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-14.75, -19.5, -14, 19.25, 14, 18.75, 14.25, -20.25)
