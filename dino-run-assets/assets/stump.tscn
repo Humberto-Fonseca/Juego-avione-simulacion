@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c3lygwe81wael" path="res://dino-run-assets/assets/img/obstacles/stump.png" id="1_demo6"]
 
 [node name="Stump" type="Area2D" unique_id=1842612368]
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1648073759]
 texture_filter = 1

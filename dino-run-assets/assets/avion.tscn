@@ -116,10 +116,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7jfv"]
-size = Vector2(192, 120)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyyl4"]
+size = Vector2(20, 136)
 
 [node name="avion" type="CharacterBody2D" unique_id=295396669]
+collision_mask = 4
 script = ExtResource("1_d6mc3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882920959]
@@ -127,12 +128,6 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvfp2")
 animation = &"crash"
-frame = 2
-frame_progress = 0.4183635
-
-[node name="Col_fly" type="CollisionShape2D" parent="." unique_id=459146143]
-position = Vector2(-8, -4)
-shape = SubResource("RectangleShape2D_m7jfv")
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1757747466]
 stream = ExtResource("3_nyyl4")
@@ -140,3 +135,11 @@ volume_db = -25.0
 
 [node name="AkuAkuSound" type="AudioStreamPlayer2D" parent="." unique_id=634012856]
 stream = ExtResource("4_nyyl4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1636650949]
+polygon = PackedVector2Array(-56, -16, 16, -16, 32, -40, 80, -56, 8, 48, -16, 56, -24, 48, -8, 8, -56, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1443691488]
+position = Vector2(40, -4)
+shape = SubResource("RectangleShape2D_nyyl4")
+disabled = true

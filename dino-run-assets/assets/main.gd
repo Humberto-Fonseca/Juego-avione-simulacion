@@ -9,7 +9,7 @@ var obstacules_type := [stump_scene, barrel_scene]
 var obstacules : Array
 	 #jugador
 @onready var avion = $avion
-@onready var collision_shape = $avion/Col_fly
+var collision_shape: CollisionShape2D
 var vidas = 3
 #varibles del juego
 var x
@@ -34,6 +34,7 @@ const MAX_DIFFICULTY : int = 2
 func _ready():
 	screen_size = get_window().size
 	ground_hight = $Ground.get_node("Sprite2D").texture.get_height()
+	collision_shape = avion.get_node("CollisionShape2D")
 	$retry.get_node("Button").pressed.connect(new_game)
 	new_game()
 	

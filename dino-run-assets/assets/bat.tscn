@@ -36,6 +36,7 @@ animations = [{
 size = Vector2(78, 126)
 
 [node name="bat" type="Area2D" unique_id=958445217]
+collision_layer = 2
 script = ExtResource("1_2qy07")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1995182164]

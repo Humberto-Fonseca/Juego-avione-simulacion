@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bgeftk53wbtmm" path="res://dino-run-assets/assets/img/obstacles/rock.png" id="1_fwyby"]
 
 [node name="rock" type="Area2D" unique_id=1797819778]
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1185604107]
 texture_filter = 1
