@@ -14,7 +14,7 @@ var vidas = 3
 #varibles del juego
 var x
 var y
-const avion_START_POS := Vector2i(200    ,485)
+const avion_START_POS := Vector2i(200,400)
 const CAM_START_POS:= Vector2i(576,324)
 const SCORE_MODIFIER : int = 10
 var score: int
@@ -164,8 +164,9 @@ func remove_obs(obs):
 func hit_obs(body):
 	if body.name == "avion":
 		vidas -= 1
-		score -= 1   
-	if vidas == 0:
+		score -= 1
+		body.recibir_dano()  
+	if vidas <= 0:
 		game_over()
 func game_over():
 	get_tree().paused = true

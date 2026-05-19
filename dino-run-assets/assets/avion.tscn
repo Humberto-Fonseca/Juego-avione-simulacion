@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cnnp7ia7xclpg" path="res://dino-run-assets/assets/avion.gd" id="1_d6mc3"]
 [ext_resource type="Texture2D" uid="uid://d2ypr1c4vti46" path="res://dino-run-assets/assets/img/obstacles/avion_gemini4.2.png" id="1_vnu0q"]
 [ext_resource type="AudioStream" uid="uid://c1hj0onkc415u" path="res://dino-run-assets/assets/sound/jump.wav" id="3_nyyl4"]
+[ext_resource type="AudioStream" uid="uid://cyb2djkhcjwyg" path="res://dino-run-assets/assets/sound/aku_aku_notification.mp3" id="4_nyyl4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkd5v"]
 atlas = ExtResource("1_vnu0q")
@@ -59,17 +60,26 @@ animations = [{
 "texture": SubResource("AtlasTexture_gkd5v")
 }, {
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_d6mc3")
 }, {
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nyyl4")
+}, {
+"duration": 1.0,
+"texture": null
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bt8sk")
 }],
 "loop": true,
 "name": &"crash",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -116,7 +126,9 @@ script = ExtResource("1_d6mc3")
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvfp2")
-animation = &"volando"
+animation = &"crash"
+frame = 2
+frame_progress = 0.4183635
 
 [node name="Col_fly" type="CollisionShape2D" parent="." unique_id=459146143]
 position = Vector2(-8, -4)
@@ -125,3 +137,6 @@ shape = SubResource("RectangleShape2D_m7jfv")
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1757747466]
 stream = ExtResource("3_nyyl4")
 volume_db = -25.0
+
+[node name="AkuAkuSound" type="AudioStreamPlayer2D" parent="." unique_id=634012856]
+stream = ExtResource("4_nyyl4")

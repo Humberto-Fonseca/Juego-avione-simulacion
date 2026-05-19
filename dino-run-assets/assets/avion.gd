@@ -1,48 +1,52 @@
 extends CharacterBody2D
 
-const JUMP_INVERTED : int = 300  
-const JUMP_SPEED: int = -300
+const JUMP_INVERTED : int = 400  
+const JUMP_SPEED: int = -400
 
-# Variables para medir el doble click
-var tiempo_arriba : float = 1.0
+var tiempo_arriba : float   = 1.0
 var tiempo_abajo : float = 1.0
-const LIMITE_DOBLE_CLICK : float = 0.3 # Segundos máximos para considerarlo "doble click"
+const LIMITE_DOBLE_CLICK : float = 0.3 
 
-# Variables para el estado Turbo
 var en_turbo : bool = false
 var temporizador_turbo : float = 0.0
-const DURACION_TURBO : float = 0.6 # Cuánto tiempo dura el efecto
-const BOOST_VELOCIDAD : float = 1.5 # Multiplicador: 1.5 = 50% más rápido
+const DURACION_TURBO : float = 0.6 
+const BOOST_VELOCIDAD : float = 1.5 
+
+# Candado visual para el impacto
+var en_choque : bool = false
 
 func _physics_process(delta):
-	# Si el juego no está corriendo, no procesamos entradas
+	# Si el juego está en Game Over, no hacemos nada
 	if not get_parent().game_running:
+		$AnimatedSprite2D.play("turbo")
 		return 
 
-	# 1. Sumamos el tiempo transcurrido (delta) a nuestros cronómetros
+	# 1. Contadores de tiempo para el doble click
 	tiempo_arriba += delta
 	tiempo_abajo += delta
 
-	# 2. Controlar la duración del turbo
+	# 2. Control del tiempo del turbo
 	if en_turbo:
 		temporizador_turbo -= delta
 		if temporizador_turbo <= 0:
-			en_turbo = false # Se apaga el turbo cuando se acaba el tiempo
+			en_turbo = false 
 
-	# 3. Detectar el instante de pulsación (Just Pressed) para el Doble Click
+	# 3. Detectar doble click para activar turbo
 	if Input.is_action_just_pressed("ui_accept"):
-		$JumpSound.play()
+		$JumpSound.play() 
 		if tiempo_arriba <= LIMITE_DOBLE_CLICK:
-			activar_turbo()
-		tiempo_arriba = 0.0 # Reiniciamos el cronómetro
-
+			en_turbo = true
+			temporizador_turbo = DURACION_TURBO
+		tiempo_arriba = 0.0 
+		
 	elif Input.is_action_just_pressed("ui_down"):
 		$JumpSound.play()
 		if tiempo_abajo <= LIMITE_DOBLE_CLICK:
-			activar_turbo()
-		tiempo_abajo = 0.0 # Reiniciamos el cronómetro
+			en_turbo = true
+			temporizador_turbo = DURACION_TURBO
+		tiempo_abajo = 0.0 
 
-	# 4. Movimiento continuo mientras se mantiene presionado
+	# 4. Movimiento físico (Sigue funcionando aunque estés chocado)
 	var multiplicador = BOOST_VELOCIDAD if en_turbo else 1.0
 
 	if Input.is_action_pressed("ui_accept"):
@@ -50,22 +54,28 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_down"):
 		velocity.y = JUMP_INVERTED * multiplicador
 	else:
-		velocity.y = 0 # Frena verticalmente si no presionas nada
+		velocity.y = 0 
 
-	# 5. Control de animaciones
-	if en_turbo:
-		$AnimatedSprite2D.play("turbo")
-	else:
-		$AnimatedSprite2D.play("volando")
+	# 5. CONTROL ESTRICTO DE ANIMACIONES
+	# (Limpiamos esto: ya no manipulamos las colisiones aquí)
+	if not en_choque:
+		if en_turbo:
+			$AnimatedSprite2D.play("turbo")
+		else:
+			$AnimatedSprite2D.play("volando")
 
-	# 6. Aplicar las físicas
 	move_and_slide()
 
-# Función auxiliar para encender el turbo
-func activar_turbo():
-	en_turbo = true
-	temporizador_turbo = DURACION_TURBO
-	 
-	# Opcional: Si quieres que el turbo también haga que el avión avance 
-	# más rápido hacia adelante (eje X), descomenta la siguiente línea:
-	# get_parent().speed += 5.0
+
+# Función que llamas desde el main.gd cuando colisiona
+func recibir_dano():
+	if en_choque: return
+	en_choque = true
+	$AnimatedSprite2D.play("crash")
+	$AkuAkuSound.play()
+	# Apaga la Máscara de la Capa 2 (Obstáculos), pero la 1 (Suelo) sigue activa
+	set_collision_mask_value(2, false)
+	await get_tree().create_timer(2.0).timeout
+	en_choque = false
+	# Vuelve a encender la detección de obstáculos
+	set_collision_mask_value(2, true)
