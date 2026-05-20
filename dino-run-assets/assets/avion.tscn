@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d2ypr1c4vti46" path="res://dino-run-assets/assets/img/obstacles/avion_gemini4.2.png" id="1_vnu0q"]
 [ext_resource type="AudioStream" uid="uid://c1hj0onkc415u" path="res://dino-run-assets/assets/sound/jump.wav" id="3_nyyl4"]
 [ext_resource type="AudioStream" uid="uid://cyb2djkhcjwyg" path="res://dino-run-assets/assets/sound/aku_aku_notification.mp3" id="4_nyyl4"]
+[ext_resource type="Texture2D" uid="uid://dnjhutmreqmyy" path="res://dino-run-assets/assets/img/obstacles/avion_gemini_rojo.png" id="5_bt8sk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nyyl4"]
 atlas = ExtResource("1_vnu0q")
@@ -116,6 +117,117 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyyl4"]
 size = Vector2(20, 136)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_adhi6"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(8, 318, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ho2pc"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(130, 318, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6p8h"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(252, 318, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o6i4"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(374, 318, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm4mx"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(8, 162, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hjc5"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(130, 162, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd0dc"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(252, 162, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6im0"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(374, 162, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwida"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(8, 6, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0bct"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(130, 6, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_281pr"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(252, 6, 122, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmdx3"]
+atlas = ExtResource("5_bt8sk")
+region = Rect2(374, 6, 122, 156)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njvjn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adhi6")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ho2pc")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6p8h")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o6i4")
+}],
+"loop": true,
+"name": &"crash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm4mx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hjc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd0dc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6im0")
+}],
+"loop": true,
+"name": &"turbo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0bct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_281pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmdx3")
+}],
+"loop": true,
+"name": &"volando",
+"speed": 10.0
+}]
+
 [node name="avion" type="CharacterBody2D" unique_id=295396669]
 collision_mask = 4
 script = ExtResource("1_d6mc3")
@@ -126,14 +238,10 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvfp2")
 animation = &"crash"
-frame_progress = 0.2310558
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1757747466]
 stream = ExtResource("3_nyyl4")
 volume_db = -25.0
-
-[node name="AkuAkuSound" type="AudioStreamPlayer2D" parent="." unique_id=634012856]
-stream = ExtResource("4_nyyl4")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1636650949]
 polygon = PackedVector2Array(-56, -16, 16, -16, 32, -40, 80, -56, 8, 48, -16, 56, -24, 48, -8, 8, -56, 0)
@@ -142,3 +250,13 @@ polygon = PackedVector2Array(-56, -16, 16, -16, 32, -40, 80, -56, 8, 48, -16, 56
 position = Vector2(40, -4)
 shape = SubResource("RectangleShape2D_nyyl4")
 disabled = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1301277530]
+visible = false
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_njvjn")
+animation = &"turbo"
+
+[node name="AkuAkuSound" type="AudioStreamPlayer" parent="." unique_id=290441093]
+stream = ExtResource("4_nyyl4")
+volume_db = -5.0

@@ -13,7 +13,6 @@ const DURACION_TURBO : float = 0.6
 const BOOST_VELOCIDAD : float = 1.5 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var aku_aku_sound: AudioStreamPlayer2D = $AkuAkuSound
 @onready var jump_sound: AudioStreamPlayer = $JumpSound
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 
@@ -24,6 +23,8 @@ var en_choque : bool = false
 @export var input_down: String = "p1_down"
 
 @onready var main = get_tree().get_first_node_in_group("main")
+# Variable para saber qué sprite animar en este avión
+var sprite_actual: AnimatedSprite2D
 
 func _physics_process(delta):
 	# Obtener la referencia si no se obtuvo al inicio (por el orden del árbol)
@@ -31,11 +32,16 @@ func _physics_process(delta):
 		main = get_tree().get_first_node_in_group("main")
 		if main == null:
 			return
-		
+# --- NUEVO CAMBIO: Detectar sprite activo ---
+	if sprite_actual == null:
+		if has_node("AnimatedSprite2D2") and $AnimatedSprite2D2.visible:
+			sprite_actual = $AnimatedSprite2D2
+		else:
+			sprite_actual = $AnimatedSprite2D
+			
 	if not main.game_running:
-		animated_sprite_2d.play("turbo")
-		return 
-
+		sprite_actual.play("turbo") # Cambiado animated_sprite_2d por sprite_actual
+		return
 	# 1. Contadores de tiempo para el doble click
 	tiempo_arriba += delta
 	tiempo_abajo += delta
@@ -89,6 +95,12 @@ func _physics_process(delta):
 			animated_sprite_2d.play("turbo")
 		else:
 			animated_sprite_2d.play("volando")
+# 5. CONTROL ESTRICTO DE ANIMACIONES
+	if not en_choque:
+		if en_turbo:
+			sprite_actual.play("turbo")  # Cambiado
+		else:
+			sprite_actual.play("volando") # Cambiado
 
 	move_and_slide()
 
@@ -96,14 +108,17 @@ func _physics_process(delta):
 func recibir_dano():
 	if en_choque: return
 	en_choque = true
-	animated_sprite_2d.play("crash")
-	aku_aku_sound.play()
 	
+	# Asegurar que esté asignado por si recibe daño antes del primer frame de física
+	if sprite_actual == null: 
+		sprite_actual = $AnimatedSprite2D2 if (has_node("AnimatedSprite2D2") and $AnimatedSprite2D2.visible) else $AnimatedSprite2D
+
+	sprite_actual.play("crash") # Cambiado
+	$AkuAkuSound.play()
 	# --- MODO INMUNIDAD ---
 	# 1. Apagamos la detección de la capa 2 (Obstáculos). 
 	# (El avión ya no choca físicamente contra ellos).
 	set_collision_mask_value(2, false)
-	
 	# 2. Apagamos la presencia del avión en la capa 1 (Jugador).
 	# (Los nodos de los obstáculos ya no detectarán señales al tocarte).
 	set_collision_layer_value(1, false)

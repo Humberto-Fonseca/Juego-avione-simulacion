@@ -40,9 +40,9 @@ const CAM_START_POS_P2 := Vector2i(576, 486)
 const SCORE_MODIFIER : int = 10
 var score: float
 var speed : float
-const START_SPEED : float = 3.0
-const MAX_SPEED : float = 18.0
-const SPEED_MODIFIER: int = 5000
+const START_SPEED : float = 10.0
+const MAX_SPEED : float = 70.0
+const SPEED_MODIFIER: int = 3000
 var screen_size : Vector2i
 var ground_hight: int 
 var game_running : bool  
@@ -81,9 +81,10 @@ func _ready():
 		avion2.input_up = "p2_up"
 		avion2.input_down = "p2_down"
 		world.add_child(avion2)
-		
-		# Modificar el color del avión 2 a un color azul celeste
-		avion2.get_node("AnimatedSprite2D").self_modulate = Color(3, 0.2, 0.5)
+# --- CORRECCIÓN DE SOBREPOSICIÓN ---
+		# Forzamos los estados de visibilidad directamente en las propiedades del nodo
+		avion2.get_node("AnimatedSprite2D").visible = false
+		avion2.get_node("AnimatedSprite2D2").visible = true
 	else:
 		viewport_container_2.hide()
 		
@@ -204,6 +205,11 @@ func new_game():
 		# Asegurarnos de que las acciones estén bien asignadas
 		avion2.input_up = "p2_up"
 		avion2.input_down = "p2_down"
+# Ocultar o mostrar el suelo visualmente según el modo de juego
+	if is_coop:
+		ground.hide()  # O también puedes usar: ground.visible = false
+	else:
+		ground.show()  # Se asegura de volverlo a mostrar si juegan solos después
 
 	ground.position = Vector2i(0,0)
 	$HUD.get_node("StartLevel").show()
@@ -268,6 +274,10 @@ func _process(delta):
 		if Input.is_action_pressed("ui_accept"):
 			game_running = true
 			$HUD.get_node("StartLevel").hide()
+			
+			# --- NUEVA ACCIÓN CORREGIDA ---
+			# Sube el volumen a -6.0 dB (volumen medio/bajo) en un lapso suave de 1.5 segundos
+			MusicaGlobal.cambiar_volumen(-6.0, 1.5)
 
 func generate_obs():
 	# La distancia entre obstáculos se reduce conforme aumenta la dificultad
@@ -332,14 +342,14 @@ func generate_obs():
 		if difficulty >= 2:
 			if (randi() % 2) == 0:
 				obs = bird_scene.instantiate()
-				if is_coop: obs.scale = Vector2(0.6, 0.6)
+				if is_coop: obs.scale = Vector2(2, 2)
 				var obs_x : int = screen_size.x + score + 100
 				var obs_y : int = x
 				add_obs(obs, obs_x, obs_y, 1)
 				
 				if is_coop:
 					var obs2 = bird_scene.instantiate()
-					obs2.scale = Vector2(0.6, 0.6)
+					obs2.scale = Vector2(2, 2)
 					add_obs(obs2, obs_x, obs_y + (screen_size.y / 2.0), 2)
 
 func add_obs(obs, x, y, owner_id=1):
@@ -393,7 +403,10 @@ func kill_player(player_node):
 func game_over():
 	get_tree().paused = false
 	game_running = false	
+	# Baja el volumen de la música a -12.0 dB en 0.8 segundos
+	MusicaGlobal.cambiar_volumen(-12.0, 0.8)
 	
+	# Guardamos los puntajes PRIMERO
 	if is_coop:
 		RankingManager.save_score(RankingManager.player1_name, score_obstaculos_p1)
 		RankingManager.save_score(RankingManager.player2_name, score_obstaculos_p2)
@@ -403,6 +416,7 @@ func game_over():
 			name_to_save = "Jugador 1"
 		RankingManager.save_score(name_to_save, score_obstaculos_p1)
 	
+	# Cambiamos de escena ÚNICAMENTE AL FINAL
 	get_tree().change_scene_to_file("res://dino-run-assets/assets/ranking.tscn")
 	
 func show_score():
