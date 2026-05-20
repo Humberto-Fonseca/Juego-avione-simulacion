@@ -5,21 +5,21 @@
 [ext_resource type="AudioStream" uid="uid://c1hj0onkc415u" path="res://dino-run-assets/assets/sound/jump.wav" id="3_nyyl4"]
 [ext_resource type="AudioStream" uid="uid://cyb2djkhcjwyg" path="res://dino-run-assets/assets/sound/aku_aku_notification.mp3" id="4_nyyl4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gkd5v"]
-atlas = ExtResource("1_vnu0q")
-region = Rect2(7, 315, 123, 152)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d6mc3"]
-atlas = ExtResource("1_vnu0q")
-region = Rect2(130, 315, 123, 152)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_nyyl4"]
 atlas = ExtResource("1_vnu0q")
-region = Rect2(253, 315, 123, 152)
+region = Rect2(10, 330, 122, 145)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bt8sk"]
 atlas = ExtResource("1_vnu0q")
-region = Rect2(376, 315, 123, 152)
+region = Rect2(132, 330, 122, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvfp2"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(254, 330, 122, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7jfv"]
+atlas = ExtResource("1_vnu0q")
+region = Rect2(376, 330, 122, 145)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n4xoo"]
 atlas = ExtResource("1_vnu0q")
@@ -57,18 +57,6 @@ region = Rect2(7, 11, 123, 152)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gkd5v")
-}, {
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d6mc3")
-}, {
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_nyyl4")
 }, {
 "duration": 1.0,
@@ -76,6 +64,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bt8sk")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvfp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7jfv")
 }],
 "loop": true,
 "name": &"crash",
@@ -124,10 +121,12 @@ collision_mask = 4
 script = ExtResource("1_d6mc3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882920959]
+visibility_layer = 7
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvfp2")
 animation = &"crash"
+frame_progress = 0.2310558
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1757747466]
 stream = ExtResource("3_nyyl4")

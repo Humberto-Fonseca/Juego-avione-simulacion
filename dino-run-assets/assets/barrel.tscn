@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d1ohdj0obvdw4" path="res://dino-run-assets/assets/img/obstacles/barrel.png" id="1_q74ni"]
 
 [node name="barrel" type="Area2D" unique_id=229638425]
-collision_layer = 2
+collision_layer = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1606395871]
 texture_filter = 1

@@ -37,7 +37,7 @@ func _physics_process(delta):
 			en_turbo = false 
 
 	# 3. Detectar doble click para activar turbo
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_up"):
 		jump_sound.play() 
 		if tiempo_arriba <= LIMITE_DOBLE_CLICK:
 			en_turbo = true
@@ -54,7 +54,7 @@ func _physics_process(delta):
 	# 4. Movimiento físico (Sigue funcionando aunque estés chocado)
 	var multiplicador = BOOST_VELOCIDAD if en_turbo else 1.0
 
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_up"):
 		velocity.y = JUMP_SPEED * multiplicador
 	elif Input.is_action_pressed("ui_down"):
 		velocity.y = JUMP_INVERTED * multiplicador
@@ -62,7 +62,6 @@ func _physics_process(delta):
 		velocity.y = 0 
 
 	# 5. CONTROL ESTRICTO DE ANIMACIONES
-	# (Limpiamos esto: ya no manipulamos las colisiones aquí)
 	if not en_choque:
 		if en_turbo:
 			animated_sprite_2d.play("turbo")
@@ -71,7 +70,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
 # Función que llamas desde el main.gd cuando colisiona
 func recibir_dano():
 	if en_choque: return
@@ -79,9 +77,22 @@ func recibir_dano():
 	animated_sprite_2d.play("crash")
 	aku_aku_sound.play()
 	
-	collision_polygon_2d.set_deferred("disabled", true)
+	# --- MODO INMUNIDAD ---
+	# 1. Apagamos la detección de la capa 2 (Obstáculos). 
+	# (El avión ya no choca físicamente contra ellos).
+	set_collision_mask_value(2, false)
+	
+	# 2. Apagamos la presencia del avión en la capa 1 (Jugador).
+	# (Los nodos de los obstáculos ya no detectarán señales al tocarte).
+	set_collision_layer_value(1, false)
+	
+	# Nota: La máscara 1 (Suelo) sigue encendida, por lo que nunca caerás al vacío.
+	
 	await get_tree().create_timer(2.0).timeout
+	
+	# --- FIN DE INMUNIDAD ---
 	en_choque = false
-	# Vuelve a encender la detección de obstáculos
-	#set_collision_mask_value(2, true)
-	collision_polygon_2d.set_deferred("disabled", false)
+	
+	# Restauramos las capas físicas a la normalidad
+	set_collision_mask_value(2, true)
+	set_collision_layer_value(1, true)

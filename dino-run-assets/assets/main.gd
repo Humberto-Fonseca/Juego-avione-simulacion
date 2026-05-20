@@ -32,7 +32,7 @@ var difficulty
 const MAX_DIFFICULTY : int = 2
 
 func _ready():
-	screen_size = get_window().size
+	screen_size = get_viewport().get_visible_rect().size
 	ground_hight = $Ground.get_node("Sprite2D").texture.get_height()
 	collision_shape = avion.get_node("CollisionShape2D")
 	$retry.get_node("Button").pressed.connect(new_game)
