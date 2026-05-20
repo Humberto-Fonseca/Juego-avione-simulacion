@@ -20,9 +20,19 @@ const BOOST_VELOCIDAD : float = 1.5
 # Candado visual para el impacto
 var en_choque : bool = false
 
+@export var input_up: String = "p1_up"
+@export var input_down: String = "p1_down"
+
+@onready var main = get_tree().get_first_node_in_group("main")
+
 func _physics_process(delta):
-	# Si el juego está en Game Over, no hacemos nada
-	if not get_parent().game_running:
+	# Obtener la referencia si no se obtuvo al inicio (por el orden del árbol)
+	if main == null:
+		main = get_tree().get_first_node_in_group("main")
+		if main == null:
+			return
+		
+	if not main.game_running:
 		animated_sprite_2d.play("turbo")
 		return 
 
@@ -37,14 +47,14 @@ func _physics_process(delta):
 			en_turbo = false 
 
 	# 3. Detectar doble click para activar turbo
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed(input_up):
 		jump_sound.play() 
 		if tiempo_arriba <= LIMITE_DOBLE_CLICK:
 			en_turbo = true
 			temporizador_turbo = DURACION_TURBO
 		tiempo_arriba = 0.0 
 		
-	elif Input.is_action_just_pressed("ui_down"):
+	elif Input.is_action_just_pressed(input_down):
 		jump_sound.play()
 		if tiempo_abajo <= LIMITE_DOBLE_CLICK:
 			en_turbo = true
@@ -54,10 +64,22 @@ func _physics_process(delta):
 	# 4. Movimiento físico (Sigue funcionando aunque estés chocado)
 	var multiplicador = BOOST_VELOCIDAD if en_turbo else 1.0
 
-	if Input.is_action_pressed("ui_up"):
-		velocity.y = JUMP_SPEED * multiplicador
-	elif Input.is_action_pressed("ui_down"):
-		velocity.y = JUMP_INVERTED * multiplicador
+	var is_up = Input.is_action_pressed(input_up)
+	var is_down = Input.is_action_pressed(input_down)
+	
+	var final_jump_speed = JUMP_SPEED
+	var final_jump_inverted = JUMP_INVERTED
+	
+	# En modo solitario la pantalla es el doble de alta, aumentamos la velocidad
+	# vertical para que la agilidad se sienta igual de responsiva que en cooperativo.
+	if scale.y >= 0.9:
+		final_jump_speed *= 1.5
+		final_jump_inverted *= 1.5
+
+	if is_up:
+		velocity.y = final_jump_speed * multiplicador
+	elif is_down:
+		velocity.y = final_jump_inverted * multiplicador
 	else:
 		velocity.y = 0 
 

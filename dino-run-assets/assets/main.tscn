@@ -11,19 +11,54 @@
 [node name="Main" type="Node" unique_id=894632688]
 script = ExtResource("1_aqs15")
 
-[node name="Bg" parent="." unique_id=1293467980 instance=ExtResource("1_cpmes")]
+[node name="ViewportLayout" type="VBoxContainer" parent="." unique_id=11223344]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="Ground" parent="." unique_id=232305911 instance=ExtResource("2_aqs15")]
+[node name="ViewportContainer1" type="SubViewportContainer" parent="ViewportLayout" unique_id=55667788]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport1" type="SubViewport" parent="ViewportLayout/ViewportContainer1" unique_id=99001122]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="World" type="Node2D" parent="ViewportLayout/ViewportContainer1/SubViewport1" unique_id=33445566]
+
+[node name="Bg" parent="ViewportLayout/ViewportContainer1/SubViewport1/World" unique_id=1293467980 instance=ExtResource("1_cpmes")]
+
+[node name="Ground" parent="ViewportLayout/ViewportContainer1/SubViewport1/World" unique_id=232305911 instance=ExtResource("2_aqs15")]
 position = Vector2(0, 32)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=757700021]
+[node name="Camera2D" type="Camera2D" parent="ViewportLayout/ViewportContainer1/SubViewport1/World" unique_id=757700021]
+position = Vector2(576, 324)
+
+[node name="avion" parent="ViewportLayout/ViewportContainer1/SubViewport1/World" unique_id=295396669 instance=ExtResource("7_nu1rs")]
+
+[node name="bat" parent="ViewportLayout/ViewportContainer1/SubViewport1/World" unique_id=958445217 instance=ExtResource("8_uli6v")]
+
+[node name="ViewportContainer2" type="SubViewportContainer" parent="ViewportLayout" unique_id=11335577]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport2" type="SubViewport" parent="ViewportLayout/ViewportContainer2" unique_id=22446688]
+handle_input_locally = false
+size = Vector2i(1152, 324)
+render_target_update_mode = 4
+
+[node name="Camera2D_P2" type="Camera2D" parent="ViewportLayout/ViewportContainer2/SubViewport2" unique_id=99887766]
 position = Vector2(576, 324)
 
 [node name="HUD" parent="." unique_id=1534607829 instance=ExtResource("5_bptky")]
 
 [node name="retry" parent="." unique_id=1973351929 instance=ExtResource("6_pd5mr")]
 process_mode = 2
-
-[node name="avion" parent="." unique_id=295396669 instance=ExtResource("7_nu1rs")]
-
-[node name="bat" parent="." unique_id=958445217 instance=ExtResource("8_uli6v")]
+visible = false
