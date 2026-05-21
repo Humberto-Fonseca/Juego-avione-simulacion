@@ -8,8 +8,10 @@ func _ready():
 	add_child(audio_player)
 	
 	# Configuración inicial de la música
-	audio_player.stream = load("res://dino-run-assets/assets/sound/musiquita_fondo.mp3") # <--- Pon la ruta real de tu canción
-	audio_player.autoplay = true
+	var stream = load("res://dino-run-assets/assets/sound/musiquita_fondo.mp3") # <--- Pon la ruta real de tu canción
+	if stream:
+		stream.loop = true
+	audio_player.stream = stream
 	audio_player.process_mode = Node.PROCESS_MODE_ALWAYS # Para que no se pause en el Game Over
 	
 	# Empezamos con un volumen bajo (en decibelios) para el menú o estado de espera

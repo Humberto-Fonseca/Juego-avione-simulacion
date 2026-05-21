@@ -40,7 +40,7 @@ const CAM_START_POS_P2 := Vector2i(576, 486)
 const SCORE_MODIFIER : int = 10
 var score: float
 var speed : float
-const START_SPEED : float = 10.0
+const START_SPEED : float = 5.0
 const MAX_SPEED : float = 70.0
 const SPEED_MODIFIER: int = 3000
 var screen_size : Vector2i
@@ -296,7 +296,7 @@ func generate_obs():
 				
 			var obs_height = obs.get_node("Sprite2D").texture.get_height()
 			var obs_scale = obs.get_node("Sprite2D").scale * obs.scale
-	#------------------------distribucion uniforme para la posic  ion en el eje y ----------------------------------
+	#------------------------distribucion uniforme para la posicion en el eje y ----------------------------------
 			# Si es cooperativo, calculamos usando la mitad de la altura de la pantalla
 			var active_height = (screen_size.y / 2.0) if is_coop else screen_size.y
 			var limite_inferior_y = (obs_height * obs_scale.y / 2 ) + 5
